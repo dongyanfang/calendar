@@ -18,10 +18,12 @@
 #left{
 	float:left;
 	margin-left:20px;
+	cursor: pointer;
 }
 #right{
 	float:right;
 	margin-right:20px;
+	cursor: pointer;
 }
 table{
 	margin-left:20px;
@@ -40,8 +42,8 @@ th,td{
 		var aSpan=oTop.getElementsByTagName('span');
 		var aTbody=document.getElementsByTagName('tbody');
 		var oDate=new Date();
-		var nowYear=2015;//oDate.getFullYear();
-		var nowMonth=2;//oDate.getMonth()+1;
+		var nowYear=2017;//oDate.getFullYear();
+		var nowMonth=7;//oDate.getMonth()+1;
 
 		aSpan[0].innerHTML=oDate.getFullYear();
 		aSpan[1].innerHTML=oDate.getMonth()+1;
@@ -95,53 +97,18 @@ th,td{
 		}
 		var aTd=document.getElementsByTagName('td');
 		//alert(oDate);
+		//console.log(oDate.getDay());
 		aa();
 		function aa(){
 			for(var k=0;k<aTd.length;k++){
 				aTd[k].innerHTML ='';
 			}
-			switch(oDate.getDay()){
-				case 0:
-				for(var k=0;k<dNumber;k++){
-					aTd[k+0].innerHTML = k+1;
-				}
-				break;
-				case 1:
-				for(var k=0;k<dNumber;k++){
-					aTd[k+1].innerHTML = k+1;
-				}
-				break;
-				case 2:
-				for(var k=0;k<dNumber;k++){
-					aTd[k+2].innerHTML = k+1;
-				}
-				break;
-				case 3:
-				for(var k=0;k<dNumber;k++){
-					aTd[k+3].innerHTML = k+1;
-				}
-				break;
-				case 4:
-				for(var k=0;k<dNumber;k++){
-					aTd[k+4].innerHTML = k+1;
-				}
-				break;
-				case 5:
-				for(var k=0;k<dNumber;k++){
-					aTd[k+5].innerHTML = k+1;
-				}
-				break;
-				case 6:
-				for(var k=0;k<dNumber;k++){
-					aTd[k+6].innerHTML = k+1;
-				}
-				break;
+			for(var k=0;k<dNumber;k++){
+				var day=parseInt("0123456".charAt(oDate.getDay()));
+				console.log(day);
+				aTd[k+day].innerHTML = k+1;
 			}
 		}
-		
-			
-
-		
 		function dayNumber(year,month){
 			var nyear=year;
 			var nmonth=month;
@@ -167,7 +134,7 @@ th,td{
 <body>
 	<div id="div1">
 		<p id="top"><span></span>年 <span></span>月 <span></span>日</p>
-		<p id="header"><span id="left"><</span><span id="year"></span>年<span id="month"></span>月<span id="right">></span></p>
+		<p id="header"><a id="left"><</a><span id="year"></span>年<span id="month"></span>月<a id="right">></a></p>
 
 		<table>
 			<thead>

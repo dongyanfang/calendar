@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>日历 </title>
+<style>
+*{ padding:0; margin:0;}
+#div1{height:300px;width:400px;margin:100px auto;border:1px solid #666;}
+#div1 #top{
+	height:25px;
+	line-height:25px;
+	text-align:center;
+	color:blue;
+}
+#header{
+	text-align:center;
+}
+#left{
+	float:left;
+	margin-left:20px;
+}
+#right{
+	float:right;
+	margin-right:20px;
+}
+table{
+	margin-left:20px;
+	margin-top:20px;
+}
+th,td{
+	height:25px;
+	line-height:25px;
+	width:50px;
+	text-align:center;
+}
+</style>
+<script>
+	window.onload=function(){
+		var oTop=document.getElementById('top');
+		var aSpan=oTop.getElementsByTagName('span');
+		var aTbody=document.getElementsByTagName('tbody');
+		var oDate=new Date();
+		var nowYear=2015;//oDate.getFullYear();
+		var nowMonth=2;//oDate.getMonth()+1;
+
+		aSpan[0].innerHTML=oDate.getFullYear();
+		aSpan[1].innerHTML=oDate.getMonth()+1;
+		aSpan[2].innerHTML=oDate.getDate();
+
+		var oLeft=document.getElementById('left');
+		var oRight=document.getElementById('right');
+		showDate();
+		oLeft.onclick=function(){
+			if(nowMonth==1){
+				nowYear=nowYear-1;
+				nowMonth=12;
+			}else{
+				nowMonth=nowMonth-1;
+			}
+
+			showDate();
+		}
+		oRight.onclick=function(){
+			if(nowMonth==12){
+				nowYear=nowYear+1;
+				nowMonth=1;
+			}else{
+				nowMonth=nowMonth+1;
+			}
+			showDate();	
+		}
+		
+		
+
+   function showDate(){
+		var oYear=document.getElementById('year');
+		var oMonth=document.getElementById('month');
+
+		oYear.innerHTML=nowYear;
+		oMonth.innerHTML=nowMonth;
+
+		oDate.setFullYear(nowYear);
+		oDate.setMonth(nowMonth-1);
+		oDate.setDate(1);
+
+		var dNumber=dayNumber(nowYear,nowMonth);
+
+		for(var i=0;i<6;i++){
+			var oTr=document.createElement('tr');
+			for(var j=0;j<7;j++){
+				var oTd=document.createElement('td');
+				oTr.appendChild(oTd);
+				}
+			aTbody[0].appendChild(oTr);
+		}
+		var aTd=document.getElementsByTagName('td');
+		//alert(oDate);
+		aa();
+		function aa(){
+			for(var k=0;k<aTd.length;k++){
+				aTd[k].innerHTML ='';
+			}
+			switch(oDate.getDay()){
+				case 0:
+				for(var k=0;k<dNumber;k++){
+					aTd[k+0].innerHTML = k+1;
+				}
+				break;
+				case 1:
+				for(var k=0;k<dNumber;k++){
+					aTd[k+1].innerHTML = k+1;
+				}
+				break;
+				case 2:
+				for(var k=0;k<dNumber;k++){
+					aTd[k+2].innerHTML = k+1;
+				}
+				break;
+				case 3:
+				for(var k=0;k<dNumber;k++){
+					aTd[k+3].innerHTML = k+1;
+				}
+				break;
+				case 4:
+				for(var k=0;k<dNumber;k++){
+					aTd[k+4].innerHTML = k+1;
+				}
+				break;
+				case 5:
+				for(var k=0;k<dNumber;k++){
+					aTd[k+5].innerHTML = k+1;
+				}
+				break;
+				case 6:
+				for(var k=0;k<dNumber;k++){
+					aTd[k+6].innerHTML = k+1;
+				}
+				break;
+			}
+		}
+		
+			
+
+		
+		function dayNumber(year,month){
+			var nyear=year;
+			var nmonth=month;
+			var nnumber=0;
+			if(nmonth==1||nmonth==3||nmonth==5||nmonth==7||nmonth==8||nmonth==10||nmonth==12){
+				nnumber=31;
+			}else if(nmonth==4||nmonth==6||nmonth==9||nmonth==11){
+				nnumber=30;
+			}else if(nmonth==2){
+				if (nyear%4==0&&nyear%100!=0){
+					nnumber=29;
+				}else{
+					nnumber=28;
+				}
+			}
+			return nnumber;
+		}
+		
+}
+	}
+</script>
+</head>
+<body>
+	<div id="div1">
+		<p id="top"><span></span>年 <span></span>月 <span></span>日</p>
+		<p id="header"><span id="left"><</span><span id="year"></span>年<span id="month"></span>月<span id="right">></span></p>
+
+		<table>
+			<thead>
+				<tr>
+					<th>日</th>
+					<th>一</th>
+					<th>二</th>
+					<th>三</th>
+					<th>四</th>
+					<th>五</th>
+					<th>六</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--<tr>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+				</tr>-->
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
